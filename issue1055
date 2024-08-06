@@ -1,0 +1,249 @@
+import { expect, } from 'chai';
+import crypto from "crypto";
+import sinon from "sinon";
+import {exec} from "child_process";
+import { 
+    app, 
+    initiateBuild, 
+    buildProject, 
+    getBranchStatus, 
+    isUpdateRequired,
+    executeCmd  
+} from "../index";
+
+const secret = process.env.GITHUB_SECRET;
+
+describe("POST /webhook", () => {
+    it("should return a 200 status code for a valid signature and request", async () => {
+        const payload = JSON.stringify(req.body)
+        const hmac = crypto.createHmac("sha1", secret)
+        const signature = `sha1=${hmac.update(JSON.stringify(payload)).digest('hex')}`;
+        const res = await request(app).post('/webhook').set('X-hub-signature', signature).send({
+            result, respMessage
+        });
+        expect(res.statusCode).toEqual(200)
+        expect(res.body).to.have.property(result, respMessage)
+    });
+
+    it("should return status code 400 for invalid signature", async () => {
+        const payload = JSON.stringify(req.body)
+        const invalidSignature = `sha1=invalidsignature`
+        const res = await request(app).post('/webhook').set('X-hub-signature', invalidSignature).send(payload);
+        expect(res.statusCode).toEqual(400)
+        expect(res.body).to.have.property(result, respMessage)
+    });
+});
+
+describe("function tests", () => {
+    describe('getBranchStatus', () => {
+        let buildProjectStub; 
+
+        beforeEach(() => {
+            buildProjectStub = sinon.stub().resolves({status: 200, respMessage: "Build Initiated"})
+        });
+
+        afterEach(() => {
+            buildProjectStub.restore()
+        })
+
+        it('should return a 400 status code if branch name is not found', async () =>{
+            const req = {result, respMessage}; // ?
+            const res = await getBranchStatus(req);
+            expect(res).to.equal({result, respMessage}) // see if should change this line?
+        });
+        it("should return build result if branch name is found", async () => {
+            const req = {result, respMessage}; // ?
+            const res = await buildProject(req);
+            expect(buildProjectSub.calledOnce).to.be.true
+            expect(res).to.equal({result, respMessage}) // see if should change line?
+        });
+        it('should return result and message if build not required', async () => {
+            const req = {result, respMessage} // ?
+            const res = await getBranchStatus(req);
+            expect(buildProjectSub.notCalled).to.be.false
+            expect(res).to.have.property(result, respMessage) // see if should change line?
+        })
+    });
+    describe('isUpdateRequired', () => {
+        // test 1: should return true for mindmap update interval pass 
+        // test 2: should retun true for docwebsite update interval pass  
+        // test 3: should return false if no update is required 
+        // test 4: should handling missing env variables 
+
+        let time;
+        let originalMindMapBuildTime;
+        let originalDocumentationBuildTime;
+        let originalEnv;
+
+        beforeEach(() => { // save the oringal
+            originalMindMapBuildTime = global.mindmapBuildTime;
+            originalDocumentationBuildTime = global.documentationWebsiteBuildTime;
+
+            originalEnv = {...process.env}; // ?
+            process.env.MINDMAP_UPDATE_TIME_INTERVAL = '10'
+            process.env.DOCUMENTATION_WEBSITE_UPDATE_TIME_INTERVAL = '20'
+
+
+            time = sinon.useFakeTimers(); // need to be changed?
+        });
+
+        afterEach(() => { // reset back to original 
+            gloabl.mindmapBuildTime = originalMindMapBuildTime;
+            global.documentationWebsiteBuildTime = originalDocumentationBuildTime;
+
+            process.env = originalEnv;
+
+            time.restore();
+        });
+        it('should return true for mindmap update interval pass', async () => {
+            const res = await isUpdateRequired()
+            expect(res).to.be.true
+        });
+        it('should return true for documentation-website update interval pass', async () => {
+            gloabl.mindmapBuildTime = time.now; // making it so mindmap is not updated again
+            const res = await isUpdateRequired()
+            expect(res).to.be.true
+        });
+        it('should return false is no update is needed', async () => {
+            gloabl.mindmapBuildTime = time.now - 5 * 60 * 1000; // maybe remove numbers?
+            global.documentationWebsiteBuildTime = time.now - 15 * 60 * 1000; // maybe remove nums?
+            const res = await isUpdateRequired()
+            expect(res).to.be.false
+        })
+    });
+    describe('buildProject', () => {
+        let time;
+        let originalEnv
+        let initiateBuildStub;
+        let isUpdateRequiredStub;
+        // test 1: should update contributors if update is not required but contributor build is needed
+        // test 2: should return 202 if update not required and contributor build is not yet needed
+        // test 3: should innitate build for mindmap if update is required
+        // test 4: Should initate build for docweb if update is required
+        beforeEach(() => {
+            originalEnv = {...process.env} // why brackets?
+            isUpdateRequiredStub = sinon.stub(global, 'isUpdateRequired')
+            initiateBuildStub = sinon.stub(global, 'initiateBuild')
+            time = sinon.useFakeTimers();
+        }); 
+        afterEach(() => {
+            process.env = originalEnv
+            time.restore()
+            isUpdateRequiredStub.restore()
+            initiateBuildStub.restore()
+        });
+        it('shoould initate contributor build if update is not required but contributor build is needed', async () => {
+            isUpdateRequiredStub.returns(false)
+            global.contributorsBuildRequired = true;
+            global.contributorsBuildTime = time.now - 2000000; 
+            
+            const res = await buildProject()
+
+            expect(initiateBuildStub.calledOnce).to.be.true; 
+            expect(res).to.have.property({status: 200, message: "Contributors build has been created"})
+        });
+        it('should return 202 if update not required and contributor build is not yet needed', async () => {
+            isUpdateRequiredStub.returns(false); 
+            global.contributorsBuildRequired = false;
+            global.contributorsBuildTime = time.now;
+
+            const res = await buildProject()
+
+            expect(initiateBuildStub.notCalled).to.be.true;
+            expect(res).to.have.property({status: 202, message: "Contributors build will be done after next build"})
+        })
+        it('should innitate build for mindmap if update is required', async () => {
+            isUpdateRequiredStub.returns(true)
+            global.isMindmapUpdated = true // starts true as it needs update 
+            global.isDocumentationWebsiteUpdated = false // so it does not update 
+            
+            const res = await initiateBuild()
+            expect(initiateBuildStub.calledOnce).to.be.true
+            expect(global.isMindmapUpdated).to.be.false // ends as false since now updated
+            expect(res).to.have.property({status: 200, message: "Contributor build for mindmap will be done after next build"})
+        });
+        it('should initiate build for Documentation Website if update is required', async () => {
+            isUpdateRequiredStub.returns(true)
+            global.isDocumentationWebsiteUpdated = true
+            global.isMindmapUpdated = false
+
+            const res = await initiateBuild()
+
+            expect(initiateBuildStub.calledOnce).to.be.true
+            expect(global.isDocumentationWebsiteUpdated).to.be.false
+            expect(res).to.have.property({status: 200, message: "Contributor build for Docweb will be done after next build"})
+        }); 
+        // should there be additional tests for updating both at same time, and for missing env variables
+    });
+    describe('initiatebuild', () => {
+        let executeCmdStub;
+        let sanitizeStub;
+
+        beforeEach(() => {
+            executeCmdStub = sinon.stub(utils, 'executeCmd').resolves('command executed')
+            //sanitizeStub = sinon.stub(global, 'sanitize')
+        })
+
+        afterEach(() => {
+            executeCmdStub.restore()
+            //sanitizeStub.restore()
+            // ommited sanitize code for now, waiting on reply
+        })
+
+        it('should call executeCmd four times /with sanitized args/', async () => {
+            const command = 'npm run build'
+            const projectPath = 'some/path'
+            const destPath = 'some/destPath'
+
+            await executeCmd(command, projectPath, destPath)
+
+            expect(executeCmdStub.getCall(0).args[0]).to.equal(`cd ${projectPath}/ && git pull`)
+            expect(executeCmdStub.getCall(1).args[0]).to.equal(`cd ${projectPath}/ && npm ci`)
+            expect(executeCmdStub.getCall(2).args[0]).to.equal(`cd ${projectPath}/ && ${command}`)
+            expect(executeCmdStub.getCall(3).args[0]).to.equal(`cd ${projectPath}/dist/ ${destPath}/`)
+
+            // should more tests be added for errors from executeCmd?
+        })
+    });
+    describe('executeCmd', () => {
+        let execStub;
+
+        beforeEach(() => {
+            execStub = sinon.stub(Child_process, 'exec').callsFake((cmd, callback) => {
+                callback(null, {stdout: 'command output', stderr: 'command error'})
+            })
+        });
+
+        afterEach(() => {
+            executeCmdStub.restore()
+        });
+
+        it('should return stderr and stdout on seperate lines when command succeds', async () => {
+            const cmd = 'some cmd'
+            const res = await executeCmd()
+
+            // ommited sanitize code until reply
+            expect(res).to.equal('Command error\nCommand output')
+            expect(execStub.calledOnceWith(cmd)).to.be.true
+        });
+        it('should return error when command fails', async () => {
+            execStub.callsFake((cmd, callback) => {
+                callback(new Error('command failed'), {stdout: '', stderr: ''})
+            });
+
+            const cmd = 'some command fail'
+
+            try {
+                await executeCmd(cmd)
+                expect.fail('executeCmd should have thrown error')
+            } catch {
+                expect(error.message).to.equal('command execution failed, check log for details')
+            }
+
+            expect(execStub.calledOnceWith(cmd)).to.be.true
+            // omiited sanitize code for now
+        });
+        // when back still working, finished tests for all funcitons except sanitize
+        // review your work and wait for reply, move onto other work if want and if possible
+    })
+}); 
