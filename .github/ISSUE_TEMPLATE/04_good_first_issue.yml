@@ -17,23 +17,25 @@ body:
         a small, well-scoped task that helps new contributors learn the
         **Hiero C++ SDK** codebase and workflow.
 
+        > Maintainers can read more about:
+        > - [Good First Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues.md)
+        > and 
+        > - [Good First Issue Candidates](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issue-candidates.md)
         ---
 
   - type: textarea
     id: intro
     attributes:
-      label: 🆕🐥 First Timers Only
+      label: 🆕🐥 First-Time Friendly
       description: Who is this issue for?
       value: |
-        This issue is intended for people who have never contributed or have made
-        minimal contributions to the **Hiero C++ SDK**.
+        This issue is especially welcoming for people who are new to contributing to the **Hiero C++ SDK**.
 
-        We know that opening a pull request (PR) can be a major barrier for new contributors.
-        The goal of this issue—and all other **Good First Issues**—is to help you make
-        your first contribution in a safe and guided way.
+        We know that opening your first pull request can feel like a big step.  
+        Issues labeled **Good First Issue** are designed to make that experience easier, clearer, and more comfortable.
 
-        No prior knowledge of Hiero, Hedera, or distributed ledger technology is required.
-        Basic familiarity with C++ and Git is sufficient.
+        No prior knowledge of Hiero, Hedera, or distributed ledger technology is required.  
+        Just a basic familiarity with C++ and Git is more than enough to get started.
     validations:
       required: false
 
@@ -41,47 +43,29 @@ body:
     attributes:
       value: |
         > [!IMPORTANT]
-        > ### 📋 Good First Issue (GFI) Guidelines
+        > ### 📋 About Good First Issues
         >
-        > A Good First Issue must have a **narrow scope** and **fully specified instructions**.
+        > Good First Issues are designed to make getting started as smooth and stress-free
+        > as possible.
         >
-        > **Examples of acceptable GFI work include:**
+        > They usually focus on:
+        > - Small, clearly scoped changes  
+        > - Straightforward updates to existing code or docs  
+        > - Simple refactors or clarity improvements  
         >
-        > - **Very small, explicitly defined changes to `src` code**
-        >   *(mechanical only — no behavior or API changes)*, such as:
-        >   - Extracting helper methods
-        >   - Improving naming or readability
-        >   - Adding `const` correctness when explicitly specified
-        > - **Refactors of existing examples**
-        >   - Splitting large `main()` functions into helpers
-        >   - Reorganizing code without changing behavior
-        > - **Documentation improvements**
-        >   - Improving Doxygen comments
-        >   - Fixing known typos or unclear wording
-        > - **Small, clearly specified edits to existing tests**
-        >
-        > **What we do NOT consider Good First Issues:**
-        >
-        > - Writing new documentation, examples, or tests from scratch
-        > - Any task requiring design or architectural decisions
-        > - Changes to SDK behavior, public APIs, or contracts
-        > - Protocol, protobuf, or DLT logic changes
-        > - Work spanning multiple files or subsystems
-        > - Tasks requiring deep domain or protocol knowledge
-        >
-        > 📖 For details, see:  
-        > `docs/maintainers/good_first_issue_candidate_guidelines.md`
+        > Other kinds of contributions — like larger features, deeper technical changes,
+        > or design-focused work — are just as valuable and often use the beginner, intermediate or advanced labels.
 
   - type: textarea
     id: issue
     attributes:
       label: 👾 Description of the Issue
       description: |
-        Describe the issue in a way that is understandable to new contributors.
-        Do NOT assume knowledge of the codebase, Hiero, or distributed ledgers.
-        Link to relevant code or documentation where helpful.
+        Describe the issue in a way that’s easy for new contributors to understand.
+        Please avoid assuming prior knowledge of the codebase, Hiero, or distributed ledgers.
+        Links to relevant files or examples are always helpful.
       value: |
-        Edit here. Example provided below.
+        Edit here. An example is provided below.
     validations:
       required: true
 
@@ -91,31 +75,30 @@ body:
         <!-- Example (hidden in submission) -->
         ## 👾 Description of the Issue — Example (C++)
 
-        The example for `TokenAssociateTransaction` located in:
+        The file:
 
-        ```
-        src/sdk/main/src/TokenAssociateTransaction.cc
-        ```
+        ```src/sdk/main/src/TokenAssociateTransaction.cc```
 
-        correctly implements token association logic. However, the method
-        `initFromSourceTransactionBody()` currently performs multiple responsibilities:
-        - Validating the transaction body
+        contains logic for building and initializing a `TokenAssociateTransaction`.
+
+        The method `initFromSourceTransactionBody()` currently performs multiple responsibilities:
+        - Validating that the transaction body contains token associate data
         - Extracting the account ID
-        - Extracting token IDs
+        - Extracting and storing token IDs
 
-        Because all logic is implemented inline, the method is harder to read
-        and understand for new contributors.
+        All of this logic is implemented inline in a single method, making it harder to read
+        and more difficult for new contributors to understand the flow.
 
-        The behavior is correct, but the structure can be improved for clarity
-        without changing functionality.
+        The behavior is correct, but the structure could be improved for clarity and readability
+        without changing any functionality.
 
   - type: textarea
     id: solution
     attributes:
       label: 💡 Proposed Solution
       description: |
-        Describe what needs to be done at a high level.
-        The solution must be fully specified and require no design decisions.
+        Describe the solution at a high level.
+        Focus on what should be done, keeping the solution clear and straightforward.
       value: |
         Edit here. Example provided below.
     validations:
@@ -125,25 +108,35 @@ body:
     attributes:
       value: |
         <!-- Example (hidden in submission) -->
-        ## 💡 Proposed Solution — Example (C++)
+        ## 💡 Proposed Solution — Example
 
-        Refactor `initFromSourceTransactionBody()` by extracting
-        clearly named private helper methods.
+        Refactor the `initFromSourceTransactionBody()` method by extracting
+        clearly named private helper functions.
 
-        The refactor must:
-        - Preserve existing behavior
-        - Avoid public API changes
-        - Be confined to `TokenAssociateTransaction.cc`
+        The refactor should:
+        - Preserve all existing behavior
+        - Avoid modifying public APIs
+        - Improve readability for new contributors
+        - Remain confined to `TokenAssociateTransaction.cc`
 
   - type: textarea
     id: implementation
     attributes:
-      label: 👩‍💻 Implementation Steps
+      label: 👩‍💻 Implementation Steps (End-to-End)
       description: |
-        Describe the concrete technical steps needed to solve the issue.
-        Break them down into small, easy-to-follow steps.
+        Please write out the end-to-end process for completing this issue from start to finish.
+
+        The steps should clearly describe:
+        - Where to begin  
+        - Which files to open  
+        - What to change  
+        - How to make the change (e.g. what code to add, remove, or update)  
+        - What the final result should look like  
+
+        Clear, connected instructions help make the contribution experience smoother
+        and more enjoyable for everyone.
       value: |
-        Edit here. Example provided below.
+        Edit here. An example is provided below.
     validations:
       required: true
 
@@ -151,38 +144,36 @@ body:
     attributes:
       value: |
         <!-- Example (hidden in submission) -->
-        ### 👩‍💻 Implementation — Example (C++)
+        ### 👩‍💻 Implementation — Example
 
         To refactor `initFromSourceTransactionBody()`:
 
-        - [ ] Identify logic that validates the transaction body
-        - [ ] Extract account ID parsing into a helper method
-        - [ ] Extract token ID parsing into a helper method
-        - [ ] Call helper methods from `initFromSourceTransactionBody()`
+        - [ ] Identify the logic that:
+          - Validates the transaction body
+          - Extracts the account ID
+          - Extracts token IDs
+        - [ ] Extract each responsibility into a private helper method, such as:
+          - `validateTokenAssociateBody(const proto::TransactionBody&)`
+          - `extractAccountId(const proto::TokenAssociateTransactionBody&)`
+          - `extractTokenIds(const proto::TokenAssociateTransactionBody&)`
+        - [ ] Call the helper methods from `initFromSourceTransactionBody()`
         - [ ] Ensure no behavior changes occur
-        - [ ] Build the SDK and run existing tests
+        - [ ] Build and run existing tests
 
-        Example helper method signatures:
-
-        ```cpp
-        void extractAccountId(const proto::TokenAssociateTransactionBody& body);
-        void extractTokenIds(const proto::TokenAssociateTransactionBody& body);
-        ```
+        No new functionality should be introduced.
 
   - type: textarea
     id: acceptance-criteria
     attributes:
       label: ✅ Acceptance Criteria
-      description: Checklist required to merge a pull request
+      description: Checklist required for completing this issue
       value: |
         To merge a pull request for this issue:
 
-        - [ ] **Assignment:** Comment `/assign`
-        - [ ] **Scope:** Changes are limited to the files described above
-        - [ ] **Behavior:** No SDK behavior or API changes
-        - [ ] **Signed Commits:** DCO and GPG signed
-        - [ ] **Tests:** All CI checks pass
-        - [ ] **Review:** All review feedback addressed
+        - [ ] **Scope:** Changes are limited to this issue
+        - [ ] **Behavior:** No other SDK behavior or API changes
+        - [ ] **Tests:** Existing and any new tests pass
+        - [ ] **Review:** All code review feedback addressed
     validations:
       required: true
 
@@ -192,18 +183,19 @@ body:
       label: 📋 Step-by-Step Contribution Guide
       description: Contribution workflow for new contributors
       value: |
-        If this is your first open-source contribution, follow these steps:
+        To help your first contribution go as smoothly as possible, we recommend following these steps:
 
         - [ ] Comment `/assign` to request the issue
+        - [ ] Wait for assignment
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
         - [ ] Push your branch and open a pull request
 
-        Helpful resources:
-        - Contributing Guide: CONTRIBUTING.md
+        Read [Workflow Guide](docs/training/workflow.md) for step-by-step workflow guidance.
+        Read [README.md](README.md) for setup instructions.
 
-        ❗ Pull requests cannot be merged without signed commits.
+        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits. Read [Signing Guide](docs/training/signing.md).
     validations:
       required: true
 
@@ -213,8 +205,9 @@ body:
       label: 🤔 Additional Information
       description: Extra context or resources for contributors
       value: |
+        If you need help, reach out to the @hiero-ledger/hiero-sdk-good-first-issue-support team who are here to assist you.
 
-        Join our community on Discord:
-        https://discord.com/channels/905194001349627914/1337424839761465364
+        You can also join our community on Discord:
+        [Hiero-SDK-C++](https://discord.com/channels/905194001349627914/1337424839761465364)
 
-        If you have questions, feel free to ask in the comments — maintainers are happy to help!
+        Maintainers are happy to help first-time contributors succeed!
