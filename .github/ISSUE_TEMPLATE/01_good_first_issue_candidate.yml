@@ -107,17 +107,19 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!-- Example (hidden in submission) -->
+       <!-- Example (hidden in submission) -->
         ## 💡 Proposed Solution — Example
+        
+        Add short, descriptive comments above selected methods in
+        `TokenAssociateTransaction.cc` explaining what each method does
+        and when it is used.
+        
+        The changes should:
+        - Not modify any existing logic
+        - Not change behavior or public APIs
+        - Be limited to comments only
+        - Help new contributors understand the flow of the file
 
-        Refactor the `initFromSourceTransactionBody()` method by extracting
-        clearly named private helper functions.
-
-        The refactor should:
-        - Preserve all existing behavior
-        - Avoid modifying public APIs
-        - Improve readability for new contributors
-        - Remain confined to `TokenAssociateTransaction.cc`
 
   - type: textarea
     id: implementation
@@ -145,22 +147,19 @@ body:
       value: |
         <!-- Example (hidden in submission) -->
         ### 👩‍💻 Implementation — Example
+        
+        To complete this change:
+        
+        - [ ] Open `src/sdk/main/src/TokenAssociateTransaction.cc`
+        - [ ] Identify methods that lack brief explanatory comments
+        - [ ] Add concise comments above those methods describing:
+          - What the method does
+          - When it is called
+        - [ ] Ensure no code logic is changed
+        - [ ] Build the project to confirm nothing is broken
+        
+        This change should only affect comments and readability.
 
-        To refactor `initFromSourceTransactionBody()`:
-
-        - [ ] Identify the logic that:
-          - Validates the transaction body
-          - Extracts the account ID
-          - Extracts token IDs
-        - [ ] Extract each responsibility into a private helper method, such as:
-          - `validateTokenAssociateBody(const proto::TransactionBody&)`
-          - `extractAccountId(const proto::TokenAssociateTransactionBody&)`
-          - `extractTokenIds(const proto::TokenAssociateTransactionBody&)`
-        - [ ] Call the helper methods from `initFromSourceTransactionBody()`
-        - [ ] Ensure no behavior changes occur
-        - [ ] Build and run existing tests
-
-        No new functionality should be introduced.
 
   - type: textarea
     id: acceptance-criteria
