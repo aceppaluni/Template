@@ -181,8 +181,6 @@ body:
               docs/sdk_developers/training/workflow/04_assigning_issues.md
         - [ ] **Scope:** Changes are limited to the files described above
         - [ ] **Behavior:** No SDK behavior or API changes
-        - [ ] **Changelog Entry:** Added  
-              docs/sdk_developers/changelog_entry.md
         - [ ] **Signed Commits:** DCO and GPG signed  
               docs/sdk_developers/signing.md
         - [ ] **Tests:** All CI checks pass
@@ -202,7 +200,6 @@ body:
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
-        - [ ] Add a changelog entry
         - [ ] Push your branch and open a pull request
 
         Helpful resources:
@@ -210,7 +207,7 @@ body:
         - Workflow Training: docs/sdk_developers/training/workflow
         - Signing Guide: docs/sdk_developers/signing.md
 
-        ❗ Pull requests cannot be merged without signed commits and a changelog entry.
+        ❗ Pull requests cannot be merged without signed commits.
     validations:
       required: true
 
