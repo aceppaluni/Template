@@ -80,22 +80,23 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!-- Example (hidden in submission) -->
+       <!-- Example (hidden in submission) -->
         ## 🐞 Problem – Example (C++)
-
-        The `TransactionReceiptQuery` implementation currently returns only the
-        parent transaction receipt, even when child receipts are available.
-
-        The mirror node API supports returning child receipts, and similar query
-        types in the SDK already support optional configuration flags.
-
-        This makes it harder to inspect scheduled or child transactions without
-        performing additional manual queries.
-
+        
+        Several query classes in the SDK expose similar configuration methods,
+        but `TransactionReceiptQuery` is missing validation that is present
+        in other query implementations.
+        
+        For example, other query classes validate that a transaction ID has
+        been set before executing the query, but `TransactionReceiptQuery`
+        does not currently perform this check.
+        
+        This can lead to unclear runtime errors when the query is executed
+        without a transaction ID.
+        
         Relevant files:
         - `src/sdk/main/include/hiero/query/TransactionReceiptQuery.h`
         - `src/sdk/main/src/query/TransactionReceiptQuery.cc`
-        - `examples/query/transaction_receipt_query.cc`
 
   - type: textarea
     id: solution
@@ -118,25 +119,15 @@ body:
       value: |
         <!-- Example (hidden in submission) -->
         ## 💡 Expected Outcome – Example (C++)
-
-        Add an optional configuration flag to `TransactionReceiptQuery` that allows
-        callers to request child receipts.
-
+        
+        Ensure that `TransactionReceiptQuery` validates that a transaction ID
+        has been set before execution.
+        
         The change should:
-        - Be opt-in (default behavior stays the same)  
-        - Reuse existing receipt parsing logic  
-        - Follow existing query configuration patterns  
-        - Aim to avoid breaking public APIs  
-
-        Example usage:
-
-        ```cpp
-        TransactionReceipt receipt =
-          TransactionReceiptQuery()
-            .setTransactionId(transactionId)
-            .setIncludeChildren(true)
-            .execute(client);
-        ```
+        - Match the validation behavior used in similar query classes
+        - Produce a clear and actionable error message
+        - Avoid changing the public API
+        - Not affect successful execution paths
 
   - type: textarea
     id: implementation
@@ -158,20 +149,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!-- Example (hidden in submission) -->
+       <!-- Example (hidden in submission) -->
         ## 🧠 Implementation Notes – Example (C++)
-
-        Likely steps:
-
-        - Add an optional boolean member (e.g. `mIncludeChildren`) to
-          `TransactionReceiptQuery`
-        - Propagate the flag to the mirror node request
-        - Update response parsing to include child receipts
-        - Update the example in:
-          `examples/query/transaction_receipt_query.cc`
-        - Add or adjust unit tests for both default and opt-in behavior
-
-        Similar patterns can be found in other query classes with optional flags.
+        
+        Suggested approach:
+        
+        - Review other query classes that require a transaction ID
+          (for example, `TransactionRecordQuery`)
+        - Identify where validation is performed before execution
+        - Add a similar validation step to `TransactionReceiptQuery`
+        - Ensure the error message is consistent with existing patterns
+        - Add or update a unit test to cover the missing-transaction-ID case
 
   - type: textarea
     id: acceptance-criteria
