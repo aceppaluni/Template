@@ -193,8 +193,6 @@ body:
         - [ ] **Assignment:** Contributor commented `/assign`
         - [ ] **Scope:** Changes are limited to `TokenAssociateTransaction.cc`
         - [ ] **Behavior:** No SDK behavior or API changes
-        - [ ] **Changelog:** Correct changelog entry added  
-              docs/sdk_developers/changelog_entry.md
         - [ ] **Signed Commits:** DCO and GPG-signed commits  
               docs/sdk_developers/signing.md
         - [ ] **Tests:** All CI checks pass
@@ -214,13 +212,12 @@ body:
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
-        - [ ] Add a changelog entry
         - [ ] Push your branch and open a pull request
 
         Helpful resources:
-        - Contributing Guide: docs/CONTRIBUTING.md
-        - Assignment Workflow: docs/sdk_developers/training/workflow/04_assigning_issues.md
-        - Signing Guide: docs/sdk_developers/signing.md
+        - Contributing Guide: 
+        - Assignment Workflow: 
+        - Signing Guide: 
 
         ❗ Pull requests **cannot be merged** without signed commits and a changelog entry.
     validations:
@@ -235,6 +232,6 @@ body:
         If you need help, feel free to ask questions in the comments.
 
         You can also join our community on Discord:
-        https://discord.gg/hiero (or project-specific invite)
+        [Hiero-SDK-Cpp](https://discord.com/channels/905194001349627914/1337424839761465364)
 
         Maintainers are happy to help first-time contributors succeed!
