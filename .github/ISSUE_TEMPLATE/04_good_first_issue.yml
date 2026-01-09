@@ -177,8 +177,7 @@ body:
       value: |
         To merge a pull request for this issue:
 
-        - [ ] **Assignment:** Comment `/assign`  
-              docs/sdk_developers/training/workflow/04_assigning_issues.md
+        - [ ] **Assignment:** Comment `/assign`
         - [ ] **Scope:** Changes are limited to the files described above
         - [ ] **Behavior:** No SDK behavior or API changes
         - [ ] **Signed Commits:** DCO and GPG signed  
