@@ -1,5 +1,5 @@
 name: Good First Issue Candidate Template
-description: Propose a potential Good First Issue (candidate)
+description: Propose a potential Good First Issue (Candidate)
 title: "[Good First Issue Candidate]: "
 labels: ["Good First Issue Candidate"]
 assignees: []
@@ -16,48 +16,38 @@ body:
         >
         > Please wait for maintainer confirmation before starting work.
         >
-        > Maintainers can read more about Good First Issues here:
-        > docs/maintainers/good_first_issue_candidate_guidelines.md
+        > Maintainers can read more about [Good First Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues-candidates.md) and [Good First Issue Candidates](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues.md))
     validations:
       required: false
 
   - type: textarea
     id: intro
     attributes:
-      label: 🆕🐥 First Timers Only
+      label: 🆕🐥 First-Time Friendly
       description: Who is this issue for?
       value: |
-        This issue is reserved for people who have never contributed or have made minimal contributions
-        to the **Hiero C++ SDK**.
+        This issue is especially welcoming for people who are new to contributing to the **Hiero C++ SDK**.
 
-        We recognize that opening a pull request (PR) can be a major barrier for new contributors.
-        The goal of this issue—and all other issues labeled **Good First Issue**—is to help you make
-        your first contribution in a safe, well-guided way.
+        We know that opening your first pull request can feel like a big step.  
+        Issues labeled **Good First Issue** are designed to make that experience easier, clearer, and more comfortable.
 
-        No prior knowledge of Hiero, Hedera, or distributed ledger technology is required.
-        Only basic familiarity with C++ and Git is expected.
+        No prior knowledge of Hiero, Hedera, or distributed ledger technology is required.  
+        Just a basic familiarity with C++ and Git is more than enough to get started.
     validations:
       required: false
-
+  
   - type: markdown
     attributes:
       value: |
         ## 🎯 Purpose of This Template
 
-        This template is used to propose **candidate issues** that may qualify as a
-        *Good First Issue* for the Hiero C++ SDK.
+        This template is for suggesting issues that *might* be a good fit as  
+        **[Good First Issues](docs/maintainers/guidelines-good-first-issues.md)** for the Hiero C++ SDK.
 
-        A Good First Issue must:
-        - Have a **narrow and clearly defined scope**
-        - Be **fully specified** (no design or behavior decisions)
-        - Avoid changes to SDK behavior, APIs, or protocol logic
-        - Be solvable by a first-time contributor with basic C++ knowledge
+        If an issue involves more exploration or design choices, it may be a better
+        fit for the **Beginner**, **Intermediate**, or **Advanced** labels.
 
-        Maintainers will review this issue and confirm whether it is promoted to
-        an official **Good First Issue**.
-
-        > If solving the issue requires deciding *what* to do or *how* something should behave,
-        > it is **not suitable** as a Good First Issue.
+        Read more about [Good First Issue Candidate Label](docs/maintainers/guidelines-good-first-issues-candidates.md)
 
   - type: markdown
     attributes:
@@ -65,36 +55,30 @@ body:
         > [!IMPORTANT]
         > ### 📋 Good First Issue (GFI) Guidelines
         >
-        > **Acceptable GFI work includes:**
+        > Good First Issues work best when they focus on **small, clearly defined changes** like:
         >
-        > - Very small, explicitly defined changes to existing `src` code
-        >   - No behavior or API changes
-        >   - Mechanical refactors only
-        > - Improvements to examples or internal code clarity
-        >   - Renaming variables
-        >   - Extracting helper methods
-        > - Small, clearly specified documentation or comment improvements
+        > - Simple updates to existing `src` code (no behavior or API changes)  
+        > - Light refactors, such as renaming variables or extracting helpers  
+        > - Small, well-specified improvements to comments or documentation  
+        > - Minor clarity improvements in examples or internal code  
         >
-        > **Not acceptable as GFIs:**
+        > Tasks that involve broader changes — like modifying SDK behavior, working on
+        > protocol logic, or touching many parts of the codebase — are usually a better
+        > fit for **Beginner**, **Intermediate**, or **Advanced** labels.
         >
-        > - Changes to SDK behavior, APIs, or contracts
-        > - Protocol or DLT logic (`toProtobuf`, `fromProtobuf`, etc.)
-        > - Work spanning multiple files or subsystems
-        > - Writing new tests, examples, or documentation from scratch
-        >
-        > 📖 See full guidelines:
-        > docs/maintainers/good_first_issue_candidate_guidelines.md
+        > [GFIC Guidelines](docs/maintainers/guidelines-good-first-issues-candidates.md)
+        > [GFI Guidelines](docs/maintainers/guidelines-good-first-issues.md)
 
   - type: textarea
     id: issue
     attributes:
       label: 👾 Description of the Issue
       description: |
-        Describe the issue in a way that is understandable to a new contributor.
-        Do not assume prior knowledge of the codebase, Hiero, or distributed ledgers.
-        Include links to relevant files where helpful.
+        Describe the issue in a way that’s easy for new contributors to understand.
+        Please avoid assuming prior knowledge of the codebase, Hiero, or distributed ledgers.
+        Links to relevant files or examples are always helpful.
       value: |
-        Edit here. Example provided below.
+        Edit here. An example is provided below.
     validations:
       required: true
 
@@ -151,12 +135,21 @@ body:
   - type: textarea
     id: implementation
     attributes:
-      label: 👩‍💻 Implementation Steps
+      label: 👩‍💻 Implementation Steps (End-to-End)
       description: |
-        Describe the technical steps required to implement the solution.
-        These steps should be explicit and easy to follow.
+        Please write out the end-to-end process for completing this issue from start to finish.
+
+        The steps should clearly describe:
+        - Where to begin  
+        - Which files to open  
+        - What to change  
+        - How to make the change (e.g. what code to add, remove, or update)  
+        - What the final result should look like  
+
+        Clear, connected instructions help make the contribution experience smoother
+        and more enjoyable for everyone.
       value: |
-        Edit here. Example provided below.
+        Edit here. An example is provided below.
     validations:
       required: true
 
@@ -186,16 +179,13 @@ body:
     id: acceptance-criteria
     attributes:
       label: ✅ Acceptance Criteria
-      description: Checklist required for merging a pull request
+      description: Checklist required for completing this issue
       value: |
         To merge a pull request for this issue:
 
-        - [ ] **Assignment:** Contributor commented `/assign`
-        - [ ] **Scope:** Changes are limited to `TokenAssociateTransaction.cc`
-        - [ ] **Behavior:** No SDK behavior or API changes
-        - [ ] **Signed Commits:** DCO and GPG-signed commits  
-              docs/sdk_developers/signing.md
-        - [ ] **Tests:** All CI checks pass
+        - [ ] **Scope:** Changes are limited to this issue
+        - [ ] **Behavior:** No other SDK behavior or API changes
+        - [ ] **Tests:** Existing and any new tests pass
         - [ ] **Review:** All code review feedback addressed
     validations:
       required: true
@@ -209,15 +199,16 @@ body:
         If this is your first time contributing to an open-source project, follow these steps:
 
         - [ ] Comment `/assign` to request the issue
+        - [ ] Wait for assignment
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
         - [ ] Push your branch and open a pull request
 
-        Helpful resources:
-        - Contributing Guide: CONTRIBUTING.md
+        See [Workflow Guide](docs/training/workflow.md).
+        Read [README.md](README.md) for setup instructions.
 
-        ❗ Pull requests **cannot be merged** without signed commits.
+        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits [Signing Guide](docs/training/signing.md).
     validations:
       required: true
 
@@ -227,9 +218,9 @@ body:
       label: 🤔 Additional Information
       description: Extra context or resources for contributors
       value: |
-        If you need help, feel free to ask questions in the comments.
+        If you need help, feel free to ask questions to the @hiero-ledger/hiero-sdk-good-first-issue-support.
 
         You can also join our community on Discord:
-        [Hiero-SDK-Cpp](https://discord.com/channels/905194001349627914/1337424839761465364)
+        [Hiero-SDK-C++](https://discord.com/channels/905194001349627914/1337424839761465364)
 
         Maintainers are happy to help first-time contributors succeed!
