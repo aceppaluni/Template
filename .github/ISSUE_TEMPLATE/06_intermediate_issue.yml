@@ -13,32 +13,33 @@ body:
 
         We truly appreciate your time and effort.
 
-        This template is designed to help you create an **Intermediate-level issue**
-        for contributors who already have some familiarity with the **Hiero C++ SDK**
-        codebase and contribution workflow.
+        This template is here to help you create an **Intermediate-level issue** for
+        contributors who are comfortable with the basics and ready to take on a bit
+        more ownership in the **Hiero C++ SDK** codebase.
 
-        The goal is to create an issue for contributors who:
-        - have basic familiarity with the Hiero C++ SDK codebase
-        - have experience following our contribution workflow
-        - are confident navigating existing source code, examples, and tests
+        These issues usually involve a mix of exploration, reasoning, and implementation,
+        while still having clear goals and boundaries.
+
+        > Maintainers can read more about:
+        > [Intermediate Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-intermediate-issues.md)
         ---
 
   - type: textarea
     id: intro
     attributes:
-      label: 🧩 Intermediate Contributors
+      label: 🧩 Intermediate Friendly
       description: Who is this issue for?
       value: |
-        This issue is intended for contributors who already have some familiarity with the
-        Hiero C++ SDK codebase and contribution workflow.
+        This issue is a good fit for contributors who are already familiar with the
+        Hiero C++ SDK and feel comfortable navigating the codebase.
 
-        You should feel comfortable:
-        - navigating `src/`, `examples/`, and `tests/`
-        - understanding existing SDK abstractions and patterns
-        - following the standard PR workflow without additional onboarding
+        Intermediate Issues often involve:
+        - Exploring existing implementations  
+        - Understanding how different components work together  
+        - Making thoughtful changes that follow established patterns  
 
-        If this is your first contribution to the project, we recommend starting with a
-        **Good First Issue** or **Beginner Issue** before working on this one.
+        The goal is to support deeper problem-solving while keeping the task clear,
+        focused, and enjoyable to work on.
     validations:
       required: false
 
@@ -46,22 +47,19 @@ body:
     attributes:
       value: |
         > [!IMPORTANT]
-        > ### 🧭 What we consider an *Intermediate Issue*
+        > ### 🧭 About Intermediate Issues
         >
-        > This issue generally:
+        > Intermediate Issues are a great next step for contributors who enjoy
+        > digging into the codebase and reasoning about how things work.
         >
-        > - Requires **some knowledge of the existing C++ codebase**, but not deep architectural expertise
-        > - Is **narrowly scoped** and well-contained
-        > - Is **low to medium risk**, avoiding highly sensitive DLT or consensus logic
-        > - May involve **small feature additions or meaningful refactors**
-        > - Provides **sufficient context and references** to reason about a solution
-        > - Often has **similar patterns elsewhere in the codebase**
+        > These issues often:
+        > - Involve multiple related files or components  
+        > - Encourage investigation and understanding of existing behavior  
+        > - Leave room for thoughtful implementation choices  
+        > - Stay focused on a clearly defined goal  
         >
-        > **What this issue is NOT:**
-        > - A beginner-friendly onboarding task
-        > - A large architectural redesign
-        > - A change requiring extensive cross-module refactors
-        > - A breaking public API change
+        > Other kinds of contributions — from beginner-friendly tasks to large
+        > system-level changes — are just as valuable and use different labels.
 
   - type: textarea
     id: problem
@@ -70,15 +68,10 @@ body:
       description: |
         Describe the problem clearly and precisely.
 
-        You may assume the reader:
-        - understands the SDK structure
-        - can navigate `src/`, `examples/`, and `tests/`
-        - is comfortable reading existing C++ implementations
-
-        Still explain:
-        - what is wrong or missing
-        - where it lives in the codebase
-        - why it matters
+        Try to explain:
+        - What is missing, unclear, or not working as expected  
+        - Where it lives in the codebase  
+        - Why it matters to users or contributors  
       value: |
         Describe the problem here.
     validations:
@@ -87,19 +80,17 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!-- Example for Problem (hidden in submission) -->
+        <!-- Example (hidden in submission) -->
         ## 🐞 Problem – Example (C++)
 
-        The `TransactionReceiptQuery` implementation in the C++ SDK currently exposes
-        only the parent transaction receipt, even when child receipts are available.
+        The `TransactionReceiptQuery` implementation currently returns only the
+        parent transaction receipt, even when child receipts are available.
 
-        In particular:
-        - The SDK does not provide a way to opt in to retrieving child receipts
-        - The mirror node API supports returning child receipts
-        - Similar query types in the SDK already support optional configuration flags
+        The mirror node API supports returning child receipts, and similar query
+        types in the SDK already support optional configuration flags.
 
-        This limitation makes it difficult to inspect scheduled or child transactions
-        without performing additional manual queries.
+        This makes it harder to inspect scheduled or child transactions without
+        performing additional manual queries.
 
         Relevant files:
         - `src/sdk/main/include/hiero/query/TransactionReceiptQuery.h`
@@ -109,34 +100,33 @@ body:
   - type: textarea
     id: solution
     attributes:
-      label: 💡 Expected Solution
+      label: 💡 Expected Outcome
       description: |
-        Describe the intended outcome.
+        Describe what a good solution would look like.
 
-        This does NOT need to be a full implementation plan,
-        but should explain:
-        - what should change
-        - what should NOT change
-        - any constraints or boundaries
+        You don’t need to provide a full implementation plan, but it helps to explain:
+        - What should change  
+        - What should stay the same  
+        - Any important constraints or goals  
       value: |
-        Describe the expected solution here.
+        Describe the expected outcome here.
     validations:
       required: true
 
   - type: markdown
     attributes:
       value: |
-        <!-- Example for Solution (hidden in submission) -->
-        ## 💡 Expected Solution – Example (C++)
+        <!-- Example (hidden in submission) -->
+        ## 💡 Expected Outcome – Example (C++)
 
-        Introduce an optional configuration flag on `TransactionReceiptQuery`
-        that allows callers to explicitly request child receipts.
+        Add an optional configuration flag to `TransactionReceiptQuery` that allows
+        callers to request child receipts.
 
         The change should:
-        - Be opt-in (default behavior must remain unchanged)
-        - Reuse existing receipt parsing logic where possible
-        - Avoid introducing breaking API changes
-        - Follow existing query configuration patterns
+        - Be opt-in (default behavior stays the same)  
+        - Reuse existing receipt parsing logic  
+        - Follow existing query configuration patterns  
+        - Aim to avoid breaking public APIs  
 
         Example usage:
 
@@ -153,13 +143,13 @@ body:
     attributes:
       label: 🧠 Implementation Notes
       description: |
-        Provide technical guidance to help implementation.
+        Share helpful technical context to guide implementation.
 
-        Examples:
-        - files or modules likely involved
-        - patterns already used elsewhere
-        - things to be careful about
-        - known edge cases
+        For example:
+        - Which files or modules are likely involved  
+        - Similar patterns elsewhere in the codebase  
+        - Things to be careful about  
+        - Known edge cases or constraints  
       value: |
         Add implementation notes here.
     validations:
@@ -168,36 +158,56 @@ body:
   - type: markdown
     attributes:
       value: |
-        <!-- Example for Implementation Notes (hidden in submission) -->
+        <!-- Example (hidden in submission) -->
         ## 🧠 Implementation Notes – Example (C++)
 
         Likely steps:
 
         - Add an optional boolean member (e.g. `mIncludeChildren`) to
           `TransactionReceiptQuery`
-        - Ensure the flag is propagated to the mirror node request
-        - Update response parsing to include child receipts when present
-        - Update or extend the example in:
+        - Propagate the flag to the mirror node request
+        - Update response parsing to include child receipts
+        - Update the example in:
           `examples/query/transaction_receipt_query.cc`
-        - Add or update unit tests covering both default and opt-in behavior
+        - Add or adjust unit tests for both default and opt-in behavior
 
-        Similar patterns can be found in other query classes that support
-        optional response extensions.
+        Similar patterns can be found in other query classes with optional flags.
 
   - type: textarea
     id: acceptance-criteria
     attributes:
       label: ✅ Acceptance Criteria
-      description: Define what "done" means for this issue
+      description: Define what “done” looks like for this issue
       value: |
-        To merge this issue, the pull request must:
+        To help get this change merged smoothly:
 
-        - [ ] Fully address the problem described above
-        - [ ] Follow existing project conventions and C++ patterns
-        - [ ] Avoid breaking public APIs
-        - [ ] Include tests and/or example updates where appropriate
-        - [ ] Pass all CI checks
-        - [ ] Use DCO and GPG-signed commits
+        - [ ] Address the problem described above  
+        - [ ] Follow existing project conventions  
+        - [ ] Avoid breaking public APIs  
+        - [ ] Include tests and/or example updates where appropriate  
+        - [ ] Pass all CI checks  
+    validations:
+      required: true
+
+  - type: textarea
+    id: contribution_steps
+    attributes:
+      label: 📋 Contribution Guide
+      description: Contribution workflow for intermediate contributors
+      value: |
+        To help your contribution go as smoothly as possible, we recommend following these steps:
+
+        - [ ] Comment `/assign` to request the issue
+        - [ ] Wait for assignment
+        - [ ] Fork the repository and create a branch
+        - [ ] Make the requested changes
+        - [ ] Sign each commit using `-s -S`
+        - [ ] Push your branch and open a pull request
+
+        Read [Workflow Guide](docs/training/workflow.md) for step-by-step workflow guidance.
+        Read [README.md](README.md) for setup instructions.
+
+        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits. Read [Signing Guide](docs/training/signing.md).
     validations:
       required: true
 
@@ -208,7 +218,9 @@ body:
       description: |
         Add any links, references, or extra notes that may help.
       value: |
-        Join the community on Discord:
+        If you have questions, the community is happy to help:
+
         https://discord.com/channels/905194001349627914/1337424839761465364
     validations:
       required: false
+
