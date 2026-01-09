@@ -17,6 +17,8 @@ body:
         a moderately easy, well-scoped task that helps contributors build confidence
         and deepen their understanding of the **Hiero C++ SDK** codebase.
 
+        > Maintainers can read more about:
+        > [Beginner Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-beginner-issues.md)
         ---
 
   - type: textarea
@@ -25,15 +27,15 @@ body:
       label: 🐥 Beginner Friendly
       description: Who is this issue for?
       value: |
-        This issue is intended for contributors who have already completed at least
-        one **Good First Issue** in the Hiero project and are now ready for slightly
-        more independent work.
+        This issue is a great fit for contributors who are ready to explore the Hiero C++
+        codebase a little more and take on slightly more independent work.
 
-        Beginner Issues may require reading existing C++ code, understanding how
-        components interact, and making small design-consistent changes — but they
-        remain well-scoped and approachable.
+        Beginner Issues often involve reading existing C++ code, understanding how
+        different parts of the SDK fit together, and making small, thoughtful updates
+        that follow existing patterns.
 
-        The goal is to help you grow your skills while continuing to contribute safely.
+        The goal is to support skill growth while keeping the experience approachable,
+        well-scoped, and enjoyable.
     validations:
       required: false
 
@@ -41,39 +43,27 @@ body:
     attributes:
       value: |
         > [!IMPORTANT]
-        > ### 🐥 Beginner Issue Guidelines
+        > ### 🐥 About Beginner Issues
         >
-        > Beginner Issues are for contributors who are comfortable with the basic
-        > project workflow and have **some C++ experience**.
+        > Beginner Issues are a great next step for contributors who feel comfortable
+        > with the basic project workflow and want to explore the codebase a little more.
         >
-        > These issues may require:
-        > - Light investigation
-        > - Reading and understanding existing code
-        > - Applying established patterns
+        > These issues often involve:
+        > - Reading existing C++ code  
+        > - Understanding how different parts of the SDK fit together  
+        > - Making small, thoughtful updates that follow established patterns  
         >
-        > **What we generally consider Beginner Issues:**
+        > You’ll usually see Beginner Issues focused on things like:
         >
-        > - **Small, well-scoped updates to existing tests**
-        >   - Extending an existing test with additional assertions
-        > - **Narrow improvements to `src` functionality**, such as:
-        >   - Improving method implementations
-        >   - Adding or refining helper functions
-        >   - Improving const-correctness or readability
-        > - **Documentation improvements**
-        >   - Improving Doxygen comments
-        >   - Clarifying example code
-        > - **Enhancements to existing examples**
-        >   - Adding clearly defined additional steps or variants
+        > - Small, well-scoped improvements to existing tests  
+        > - Narrow updates to `src` functionality (e.g. refining helpers or improving readability)  
+        > - Documentation or comment clarity  
+        > - Enhancements to existing examples  
         >
-        > **What we generally do NOT consider Beginner Issues:**
+        > Other types of contributions — such as brand-new features, broader system changes,
+        > or deeper technical work — are just as valuable and may use different labels.
         >
-        > - Tasks better suited for Good First Issues (purely mechanical changes)
-        > - Writing entirely new examples or test suites
-        > - Changes to SDK behavior, public APIs, or contracts
-        > - Changes to DLT, protobuf, or serialization logic
-        > - Work requiring deep knowledge across multiple subsystems
-        >
-        > 📖 For more details, see:  
+        > 📖 Learn more here:  
         > `docs/maintainers/beginner_issue_guidelines.md`
 
   - type: textarea
@@ -81,9 +71,11 @@ body:
     attributes:
       label: 👾 Description of the Issue
       description: |
-        Describe the issue in a way that is approachable to beginner contributors.
-        Assume only basic familiarity with C++, the repository structure, and Hiero.
-        Encourage learning and exploration, but keep the task clearly defined.
+        Describe the issue in a clear, approachable way.
+
+        Aim to explain the context, what needs to change, and the expected outcome
+        without assuming deep knowledge of the codebase. The goal is to make the
+        task feel understandable, well-scoped, and encouraging to take on.
       value: |
         Edit here. Example provided below.
     validations:
@@ -113,10 +105,12 @@ body:
     attributes:
       label: 💡 Proposed Solution
       description: |
-        Describe what needs to be done to solve the issue.
-        The solution should be clear, well-scoped, and not require architectural decisions.
+        Describe the approach for addressing this issue in a clear and focused way.
+
+        Try to explain what will be changed and what the end result should look like,
+        keeping the scope straightforward and easy to follow.
       value: |
-        Edit here. Example provided below.
+        Edit here. An example is provided below.
     validations:
       required: true
 
@@ -130,7 +124,7 @@ body:
         `toString()` method (or related helper methods) to clearly show the shard,
         realm, and account number.
 
-        The change must:
+        The change should:
         - Preserve existing behavior
         - Avoid public API changes
         - Be consistent with patterns used by other ID classes
@@ -140,14 +134,16 @@ body:
         ```
         AccountId{shard=0, realm=0, num=1234}
         ```
-
   - type: textarea
     id: implementation
     attributes:
       label: 👩‍💻 Implementation Steps
       description: |
-        Describe the technical steps required to implement the solution.
-        Break them into small, easy-to-follow steps.
+        Walk through how to implement the solution in clear, easy-to-follow steps.
+
+        Beginner Issues often leave a little more room for exploration than Good First
+        Issues, so it’s helpful to describe the overall approach, key files to look at,
+        what to change, and how to check the result.
       value: |
         Edit here. Example provided below.
     validations:
@@ -174,16 +170,14 @@ body:
     id: acceptance-criteria
     attributes:
       label: ✅ Acceptance Criteria
-      description: Checklist required to merge a pull request
+      description: Checklist required for completing this issue
       value: |
-        To merge a pull request for this issue:
+        To help get this change merged smoothly:
 
-        - [ ] **Assignment:** Comment `/assign`
-        - [ ] **Scope:** Changes are limited to the files described
-        - [ ] **Behavior:** No changes to SDK behavior or public APIs
-        - [ ] **Signed Commits:** DCO and GPG signed
-        - [ ] **Tests:** All CI checks pass
-        - [ ] **Review:** All feedback addressed
+        - [ ] **Scope:** Changes are limited to this issue
+        - [ ] **Behavior:** No other SDK behavior or API changes
+        - [ ] **Tests:** Existing and any new tests pass
+        - [ ] **Review:** All code review feedback addressed
     validations:
       required: true
 
@@ -191,18 +185,21 @@ body:
     id: contribution_steps
     attributes:
       label: 📋 Step-by-Step Contribution Guide
-      description: Contribution workflow for beginner contributors
+      description: Contribution workflow for new contributors
       value: |
+        To help your first contribution go as smoothly as possible, we recommend following these steps:
+
         - [ ] Comment `/assign` to request the issue
+        - [ ] Wait for assignment
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
         - [ ] Push your branch and open a pull request
 
-        Helpful resources:
-        - CONTRIBUTING.md
+        Read [Workflow Guide](docs/training/workflow.md) for step-by-step workflow guidance.
+        Read [README.md](README.md) for setup instructions.
 
-        ❗ Pull requests cannot be merged without signed commits and a changelog entry.
+        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits. Read [Signing Guide](docs/training/signing.md).
     validations:
       required: true
 
@@ -210,11 +207,12 @@ body:
     id: information
     attributes:
       label: 🤔 Additional Information
-      description: Extra resources or context for contributors
+      description: Extra context or resources for contributors
       value: |
+        If you have questions while working on this issue, feel free to ask!
 
-        Join the community on Discord:
-        https://discord.com/channels/905194001349627914/1337424839761465364
+        You can reach the community and maintainers here:
+        [Hiero-SDK-C++ Discord](https://discord.com/channels/905194001349627914/1337424839761465364)
 
-        If you get stuck or have questions, feel free to ask in the issue comments —
-        maintainers are happy to help!
+        Whether you need help finding the right file, understanding existing code,
+        or confirming your approach — we’re happy to help.
