@@ -215,9 +215,7 @@ body:
         - [ ] Push your branch and open a pull request
 
         Helpful resources:
-        - Contributing Guide: 
-        - Assignment Workflow: 
-        - Signing Guide: 
+        - Contributing Guide: CONTRIBUTING.md
 
         ❗ Pull requests **cannot be merged** without signed commits.
     validations:
