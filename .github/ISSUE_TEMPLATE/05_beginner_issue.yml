@@ -178,14 +178,10 @@ body:
       value: |
         To merge a pull request for this issue:
 
-        - [ ] **Assignment:** Comment `/assign`  
-              docs/sdk_developers/training/workflow/04_assigning_issues.md
+        - [ ] **Assignment:** Comment `/assign`
         - [ ] **Scope:** Changes are limited to the files described
         - [ ] **Behavior:** No changes to SDK behavior or public APIs
-        - [ ] **Changelog Entry:** Added  
-              docs/sdk_developers/changelog_entry.md
-        - [ ] **Signed Commits:** DCO and GPG signed  
-              docs/sdk_developers/signing.md
+        - [ ] **Signed Commits:** DCO and GPG signed
         - [ ] **Tests:** All CI checks pass
         - [ ] **Review:** All feedback addressed
     validations:
@@ -201,13 +197,10 @@ body:
         - [ ] Fork the repository and create a branch
         - [ ] Make the requested changes
         - [ ] Sign each commit using `-s -S`
-        - [ ] Add a changelog entry
         - [ ] Push your branch and open a pull request
 
         Helpful resources:
         - CONTRIBUTING.md
-        - docs/sdk_developers/training/workflow
-        - docs/sdk_developers/signing.md
 
         ❗ Pull requests cannot be merged without signed commits and a changelog entry.
     validations:
@@ -219,14 +212,9 @@ body:
       label: 🤔 Additional Information
       description: Extra resources or context for contributors
       value: |
-        Helpful resources:
-        - SDK Developer Docs:
-          https://github.com/hiero-ledger/hiero-sdk-cpp/tree/main/docs/sdk_developers
-        - SDK Developer Training:
-          https://github.com/hiero-ledger/hiero-sdk-cpp/tree/main/docs/sdk_developers/training
 
         Join the community on Discord:
-        https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/discord.md
+        https://discord.com/channels/905194001349627914/1337424839761465364
 
         If you get stuck or have questions, feel free to ask in the issue comments —
         maintainers are happy to help!
