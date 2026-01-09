@@ -180,8 +180,7 @@ body:
         - [ ] **Assignment:** Comment `/assign`
         - [ ] **Scope:** Changes are limited to the files described above
         - [ ] **Behavior:** No SDK behavior or API changes
-        - [ ] **Signed Commits:** DCO and GPG signed  
-              docs/sdk_developers/signing.md
+        - [ ] **Signed Commits:** DCO and GPG signed
         - [ ] **Tests:** All CI checks pass
         - [ ] **Review:** All review feedback addressed
     validations:
@@ -203,8 +202,6 @@ body:
 
         Helpful resources:
         - Contributing Guide: CONTRIBUTING.md
-        - Workflow Training: docs/sdk_developers/training/workflow
-        - Signing Guide: docs/sdk_developers/signing.md
 
         ❗ Pull requests cannot be merged without signed commits.
     validations:
