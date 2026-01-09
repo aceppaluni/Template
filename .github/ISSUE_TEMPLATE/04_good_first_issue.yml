@@ -79,18 +79,19 @@ body:
 
         ```src/sdk/main/src/TokenAssociateTransaction.cc```
 
-        contains logic for building and initializing a `TokenAssociateTransaction`.
-
-        The method `initFromSourceTransactionBody()` currently performs multiple responsibilities:
-        - Validating that the transaction body contains token associate data
-        - Extracting the account ID
-        - Extracting and storing token IDs
-
-        All of this logic is implemented inline in a single method, making it harder to read
-        and more difficult for new contributors to understand the flow.
-
-        The behavior is correct, but the structure could be improved for clarity and readability
-        without changing any functionality.
+        
+        contains several small helper methods used by
+        `TokenAssociateTransaction`.
+        
+        Some local variable names inside these methods are abbreviated
+        and not immediately clear to new contributors.
+        
+        For example, variables like `txBody` and `acctId` are used without
+        additional context, which can make the code harder to read when
+        learning the SDK.
+        
+        The code works correctly, but improving variable naming would make
+        the file easier to understand and maintain.
 
   - type: textarea
     id: solution
@@ -109,15 +110,16 @@ body:
       value: |
         <!-- Example (hidden in submission) -->
         ## 💡 Proposed Solution — Example
-
-        Refactor the `initFromSourceTransactionBody()` method by extracting
-        clearly named private helper functions.
-
-        The refactor should:
-        - Preserve all existing behavior
-        - Avoid modifying public APIs
+        
+        Rename a small number of local variables in
+        `TokenAssociateTransaction.cc` to use clearer, more descriptive names.
+        
+        The changes should:
+        - Not modify any logic or behavior
+        - Not change public APIs
+        - Be limited to local variable names only
         - Improve readability for new contributors
-        - Remain confined to `TokenAssociateTransaction.cc`
+
 
   - type: textarea
     id: implementation
@@ -145,22 +147,17 @@ body:
       value: |
         <!-- Example (hidden in submission) -->
         ### 👩‍💻 Implementation — Example
-
-        To refactor `initFromSourceTransactionBody()`:
-
-        - [ ] Identify the logic that:
-          - Validates the transaction body
-          - Extracts the account ID
-          - Extracts token IDs
-        - [ ] Extract each responsibility into a private helper method, such as:
-          - `validateTokenAssociateBody(const proto::TransactionBody&)`
-          - `extractAccountId(const proto::TokenAssociateTransactionBody&)`
-          - `extractTokenIds(const proto::TokenAssociateTransactionBody&)`
-        - [ ] Call the helper methods from `initFromSourceTransactionBody()`
-        - [ ] Ensure no behavior changes occur
-        - [ ] Build and run existing tests
-
-        No new functionality should be introduced.
+        
+        To complete this task:
+        
+        - [ ] Open `src/sdk/main/src/TokenAssociateTransaction.cc`
+        - [ ] Identify local variables with abbreviated or unclear names
+        - [ ] Rename them to clearer alternatives (for example:
+              `txBody` → `transactionBody`)
+        - [ ] Ensure formatting and style remain consistent
+        - [ ] Build the project to confirm nothing is broken
+        
+        No functional changes should be introduced.
 
   - type: textarea
     id: acceptance-criteria
