@@ -106,9 +106,7 @@ body:
 
         The file:
 
-        ```
-        src/sdk/main/src/TokenAssociateTransaction.cc
-        ```
+        ```src/sdk/main/src/TokenAssociateTransaction.cc```
 
         contains logic for building and initializing a `TokenAssociateTransaction`.
 
