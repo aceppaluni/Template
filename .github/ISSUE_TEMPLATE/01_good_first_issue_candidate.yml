@@ -77,18 +77,20 @@ body:
 
         ```src/sdk/main/src/TokenAssociateTransaction.cc```
 
-        contains logic for building and initializing a `TokenAssociateTransaction`.
-
-        The method `initFromSourceTransactionBody()` currently performs multiple responsibilities:
-        - Validating that the transaction body contains token associate data
-        - Extracting the account ID
-        - Extracting and storing token IDs
-
-        All of this logic is implemented inline in a single method, making it harder to read
-        and more difficult for new contributors to understand the flow.
-
-        The behavior is correct, but the structure could be improved for clarity and readability
-        without changing any functionality.
+        
+        contains several short methods that are part of the
+        `TokenAssociateTransaction` implementation.
+        
+        Some of these methods lack brief comments explaining their purpose,
+        which can make the file harder to understand for new contributors
+        who are unfamiliar with the SDK.
+        
+        For example, methods like `submitRequest()` and `addToBody()` are
+        correctly implemented, but their intent is not immediately obvious
+        without reading surrounding code.
+        
+        The behavior is correct, but adding small, clear comments would
+        make the file easier to read and maintain.
 
   - type: textarea
     id: solution
