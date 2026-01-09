@@ -14,11 +14,12 @@ body:
         > It is being evaluated for suitability and may require
         > clarification or refinement before it is ready to be picked up.
         >
-        > Please wait for maintainer confirmation before starting work.
+        > Please wait for maintainer confirmation before starting work, so we can make sure the issue is fully ready
         >
-        > Maintainers can read more about [Good First Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues-candidates.md) and [Good First Issue Candidates](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues.md))
-    validations:
-      required: false
+        > Maintainers can read more about:
+        > - [Good First Issues](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issues.md)
+        > and 
+        > - [Good First Issue Candidates](https://github.com/hiero-ledger/hiero-sdk-cpp/blob/main/docs/maintainers/guidelines-good-first-issue-candidates.md)
 
   - type: textarea
     id: intro
@@ -39,35 +40,19 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 🎯 Purpose of This Template
-
-        This template is for suggesting issues that *might* be a good fit as  
-        **[Good First Issues](docs/maintainers/guidelines-good-first-issues.md)** for the Hiero C++ SDK.
-
-        If an issue involves more exploration or design choices, it may be a better
-        fit for the **Beginner**, **Intermediate**, or **Advanced** labels.
-
-        Read more about [Good First Issue Candidate Label](docs/maintainers/guidelines-good-first-issues-candidates.md)
-
-  - type: markdown
-    attributes:
-      value: |
         > [!IMPORTANT]
-        > ### 📋 Good First Issue (GFI) Guidelines
+        > ### 📋 About Good First Issues
         >
-        > Good First Issues work best when they focus on **small, clearly defined changes** like:
+        > Good First Issues are designed to make getting started as smooth and stress-free
+        > as possible.
         >
-        > - Simple updates to existing `src` code (no behavior or API changes)  
-        > - Light refactors, such as renaming variables or extracting helpers  
-        > - Small, well-specified improvements to comments or documentation  
-        > - Minor clarity improvements in examples or internal code  
+        > They usually focus on:
+        > - Small, clearly scoped changes  
+        > - Straightforward updates to existing code or docs  
+        > - Simple refactors or clarity improvements  
         >
-        > Tasks that involve broader changes — like modifying SDK behavior, working on
-        > protocol logic, or touching many parts of the codebase — are usually a better
-        > fit for **Beginner**, **Intermediate**, or **Advanced** labels.
-        >
-        > [GFIC Guidelines](docs/maintainers/guidelines-good-first-issues-candidates.md)
-        > [GFI Guidelines](docs/maintainers/guidelines-good-first-issues.md)
+        > Other kinds of contributions — like larger features, deeper technical changes,
+        > or design-focused work — are just as valuable and often use the beginner, intermediate or advanced labels.
 
   - type: textarea
     id: issue
@@ -196,7 +181,7 @@ body:
       label: 📋 Step-by-Step Contribution Guide
       description: Contribution workflow for new contributors
       value: |
-        If this is your first time contributing to an open-source project, follow these steps:
+        To help your first contribution go as smoothly as possible, we recommend following these steps:
 
         - [ ] Comment `/assign` to request the issue
         - [ ] Wait for assignment
@@ -205,10 +190,10 @@ body:
         - [ ] Sign each commit using `-s -S`
         - [ ] Push your branch and open a pull request
 
-        See [Workflow Guide](docs/training/workflow.md).
+        Read [Workflow Guide](docs/training/workflow.md) for step-by-step workflow guidance.
         Read [README.md](README.md) for setup instructions.
 
-        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits [Signing Guide](docs/training/signing.md).
+        ❗ Pull requests **cannot be merged** without `S` and `s` signed commits. Read [Signing Guide](docs/training/signing.md).
     validations:
       required: true
 
@@ -218,7 +203,7 @@ body:
       label: 🤔 Additional Information
       description: Extra context or resources for contributors
       value: |
-        If you need help, feel free to ask questions to the @hiero-ledger/hiero-sdk-good-first-issue-support.
+        If you need help, reach out to the @hiero-ledger/hiero-sdk-good-first-issue-support team who are here to assist you.
 
         You can also join our community on Discord:
         [Hiero-SDK-C++](https://discord.com/channels/905194001349627914/1337424839761465364)
