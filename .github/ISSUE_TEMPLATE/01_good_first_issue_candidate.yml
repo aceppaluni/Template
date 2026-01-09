@@ -219,7 +219,7 @@ body:
         - Assignment Workflow: 
         - Signing Guide: 
 
-        ❗ Pull requests **cannot be merged** without signed commits and a changelog entry.
+        ❗ Pull requests **cannot be merged** without signed commits.
     validations:
       required: true
 
