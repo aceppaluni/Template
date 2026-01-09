@@ -1,0 +1,242 @@
+name: Good First Issue Candidate Template
+description: Propose a potential Good First Issue (candidate)
+title: "[Good First Issue Candidate]: "
+labels: ["Good First Issue Candidate"]
+assignees: []
+
+body:
+  - type: textarea
+    id: intro-gfi-candidate
+    attributes:
+      label: ⚠️ Good First Issue — Candidate
+      value: |
+        > This issue is not yet a confirmed Good First Issue.
+        > It is being evaluated for suitability and may require
+        > clarification or refinement before it is ready to be picked up.
+        >
+        > Please wait for maintainer confirmation before starting work.
+        >
+        > Maintainers can read more about Good First Issues here:
+        > docs/maintainers/good_first_issue_candidate_guidelines.md
+    validations:
+      required: false
+
+  - type: textarea
+    id: intro
+    attributes:
+      label: 🆕🐥 First Timers Only
+      description: Who is this issue for?
+      value: |
+        This issue is reserved for people who have never contributed or have made minimal contributions
+        to the **Hiero C++ SDK**.
+
+        We recognize that opening a pull request (PR) can be a major barrier for new contributors.
+        The goal of this issue—and all other issues labeled **Good First Issue**—is to help you make
+        your first contribution in a safe, well-guided way.
+
+        No prior knowledge of Hiero, Hedera, or distributed ledger technology is required.
+        Only basic familiarity with C++ and Git is expected.
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎯 Purpose of This Template
+
+        This template is used to propose **candidate issues** that may qualify as a
+        *Good First Issue* for the Hiero C++ SDK.
+
+        A Good First Issue must:
+        - Have a **narrow and clearly defined scope**
+        - Be **fully specified** (no design or behavior decisions)
+        - Avoid changes to SDK behavior, APIs, or protocol logic
+        - Be solvable by a first-time contributor with basic C++ knowledge
+
+        Maintainers will review this issue and confirm whether it is promoted to
+        an official **Good First Issue**.
+
+        > If solving the issue requires deciding *what* to do or *how* something should behave,
+        > it is **not suitable** as a Good First Issue.
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]
+        > ### 📋 Good First Issue (GFI) Guidelines
+        >
+        > **Acceptable GFI work includes:**
+        >
+        > - Very small, explicitly defined changes to existing `src` code
+        >   - No behavior or API changes
+        >   - Mechanical refactors only
+        > - Improvements to examples or internal code clarity
+        >   - Renaming variables
+        >   - Extracting helper methods
+        > - Small, clearly specified documentation or comment improvements
+        >
+        > **Not acceptable as GFIs:**
+        >
+        > - Changes to SDK behavior, APIs, or contracts
+        > - Protocol or DLT logic (`toProtobuf`, `fromProtobuf`, etc.)
+        > - Work spanning multiple files or subsystems
+        > - Writing new tests, examples, or documentation from scratch
+        >
+        > 📖 See full guidelines:
+        > docs/maintainers/good_first_issue_candidate_guidelines.md
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: 👾 Description of the Issue
+      description: |
+        Describe the issue in a way that is understandable to a new contributor.
+        Do not assume prior knowledge of the codebase, Hiero, or distributed ledgers.
+        Include links to relevant files where helpful.
+      value: |
+        Edit here. Example provided below.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Example (hidden in submission) -->
+        ## 👾 Description of the Issue — Example (C++)
+
+        The file:
+
+        ```
+        src/sdk/main/src/TokenAssociateTransaction.cc
+        ```
+
+        contains logic for building and initializing a `TokenAssociateTransaction`.
+
+        The method `initFromSourceTransactionBody()` currently performs multiple responsibilities:
+        - Validating that the transaction body contains token associate data
+        - Extracting the account ID
+        - Extracting and storing token IDs
+
+        All of this logic is implemented inline in a single method, making it harder to read
+        and more difficult for new contributors to understand the flow.
+
+        The behavior is correct, but the structure could be improved for clarity and readability
+        without changing any functionality.
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: |
+        Describe the solution at a high level.
+        Focus on *what* should be done, not *why* or alternative approaches.
+      value: |
+        Edit here. Example provided below.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Example (hidden in submission) -->
+        ## 💡 Proposed Solution — Example
+
+        Refactor the `initFromSourceTransactionBody()` method by extracting
+        clearly named private helper functions.
+
+        The refactor should:
+        - Preserve all existing behavior
+        - Avoid modifying public APIs
+        - Improve readability for new contributors
+        - Remain confined to `TokenAssociateTransaction.cc`
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: 👩‍💻 Implementation Steps
+      description: |
+        Describe the technical steps required to implement the solution.
+        These steps should be explicit and easy to follow.
+      value: |
+        Edit here. Example provided below.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        <!-- Example (hidden in submission) -->
+        ### 👩‍💻 Implementation — Example
+
+        To refactor `initFromSourceTransactionBody()`:
+
+        - [ ] Identify the logic that:
+          - Validates the transaction body
+          - Extracts the account ID
+          - Extracts token IDs
+        - [ ] Extract each responsibility into a private helper method, such as:
+          - `validateTokenAssociateBody(const proto::TransactionBody&)`
+          - `extractAccountId(const proto::TokenAssociateTransactionBody&)`
+          - `extractTokenIds(const proto::TokenAssociateTransactionBody&)`
+        - [ ] Call the helper methods from `initFromSourceTransactionBody()`
+        - [ ] Ensure no behavior changes occur
+        - [ ] Build and run existing tests
+
+        No new functionality should be introduced.
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: Checklist required for merging a pull request
+      value: |
+        To merge a pull request for this issue:
+
+        - [ ] **Assignment:** Contributor commented `/assign`
+        - [ ] **Scope:** Changes are limited to `TokenAssociateTransaction.cc`
+        - [ ] **Behavior:** No SDK behavior or API changes
+        - [ ] **Changelog:** Correct changelog entry added  
+              docs/sdk_developers/changelog_entry.md
+        - [ ] **Signed Commits:** DCO and GPG-signed commits  
+              docs/sdk_developers/signing.md
+        - [ ] **Tests:** All CI checks pass
+        - [ ] **Review:** All code review feedback addressed
+    validations:
+      required: true
+
+  - type: textarea
+    id: contribution_steps
+    attributes:
+      label: 📋 Step-by-Step Contribution Guide
+      description: Contribution workflow for new contributors
+      value: |
+        If this is your first time contributing to an open-source project, follow these steps:
+
+        - [ ] Comment `/assign` to request the issue
+        - [ ] Fork the repository and create a branch
+        - [ ] Make the requested changes
+        - [ ] Sign each commit using `-s -S`
+        - [ ] Add a changelog entry
+        - [ ] Push your branch and open a pull request
+
+        Helpful resources:
+        - Contributing Guide: docs/CONTRIBUTING.md
+        - Assignment Workflow: docs/sdk_developers/training/workflow/04_assigning_issues.md
+        - Signing Guide: docs/sdk_developers/signing.md
+
+        ❗ Pull requests **cannot be merged** without signed commits and a changelog entry.
+    validations:
+      required: true
+
+  - type: textarea
+    id: information
+    attributes:
+      label: 🤔 Additional Information
+      description: Extra context or resources for contributors
+      value: |
+        If you need help, feel free to ask questions in the comments.
+
+        You can also join our community on Discord:
+        https://discord.gg/hiero (or project-specific invite)
+
+        Maintainers are happy to help first-time contributors succeed!
