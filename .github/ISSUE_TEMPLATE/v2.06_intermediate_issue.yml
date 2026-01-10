@@ -1,4 +1,4 @@
- name: Intermediate Issue Template
+name: Intermediate Issue Template
 description: Create a well-documented issue for contributors with some familiarity with the codebase (C++)
 title: "[Intermediate]: "
 labels: ["intermediate"]
