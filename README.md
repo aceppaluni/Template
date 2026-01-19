@@ -1,4 +1,5 @@
 # Windows Setup Instructions
+These instructions are desinged to be compatible with Windows 10 and 11.
 
 ## Step 1
 
