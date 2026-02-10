@@ -31,13 +31,13 @@ $ pnpm add @hiero-ledger/sdk
 ## Build
 
 ### Windows
-Link for getting started on Windows
+Link for getting started on [Windows]()
 
 ### Mac
-Link for getting started on Windows
+Link for getting started on [Mac]()
 
 ### Linux
-Link for getting started on Windows
+Link for getting started on [Linux]()
 
 ## Browser Usage
 
